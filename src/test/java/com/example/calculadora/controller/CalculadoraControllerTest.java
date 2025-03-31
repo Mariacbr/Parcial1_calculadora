@@ -1,41 +1,33 @@
 package com.example.calculadora.controller;
 
-import com.example.calculadora.service.CalculadoraService;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class CalculadoraControllerTest {
+public class CalculadoraControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void testSuma() throws Exception {
-        mockMvc.perform(get("/calculadora/operar")
-                        .param("a", "5")
-                        .param("b", "3")
-                        .param("operacion", "suma"))
+        mockMvc.perform(get("/calculadora/operar?a=5&b=3&operacion=suma"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("8.0"));
+                .andExpect(jsonPath("$.resultado").value(8)); // Verifica que la respuesta JSON tenga el resultado esperado
     }
 
     @Test
-    void testResta() throws Exception {
-        mockMvc.perform(get("/calculadora/operar")
-                        .param("a", "10")
-                        .param("b", "4")
-                        .param("operacion", "resta"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("6.0"));
+    void testDivisionPorCero() throws Exception {
+        mockMvc.perform(get("/calculadora/operar?a=10&b=0&operacion=division"))
+                .andExpect(status().isBadRequest()); // Esperamos un error 400 (Bad Request)
     }
-
-
 }
 

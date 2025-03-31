@@ -11,7 +11,7 @@ public class CalculadoraView extends JFrame {
     public JLabel resultadoLabel;
 
     public CalculadoraView() {
-        setTitle("Calculadora REST - Spring Boot");
+        setTitle("Calculadora sencilla - Spring Boot");
         setSize(400, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -26,7 +26,7 @@ public class CalculadoraView extends JFrame {
         java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
         gbc.insets = new java.awt.Insets(10, 10, 10, 10);
 
-        JLabel titleLabel = new JLabel("Calculadora REST");
+        JLabel titleLabel = new JLabel("Calculadora sencilla");
         titleLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
         titleLabel.setForeground(new java.awt.Color(33, 33, 33));
 

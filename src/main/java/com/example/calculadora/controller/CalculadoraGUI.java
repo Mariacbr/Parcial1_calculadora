@@ -41,7 +41,7 @@ public class CalculadoraGUI {
                         in.close();
                         view.resultadoLabel.setText("Resultado: " + content.toString());
                     } else {
-                        view.resultadoLabel.setText("Error al llamar al servicio");
+                        view.resultadoLabel.setText("Error, operacion no valida");
                     }
                     con.disconnect();
                 } catch (NumberFormatException ex) {
